@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>今日使う食材提案します！</h1>
+    <form method="post">
+      {% csrf_token %} {{ formNum.as_p }} {% csrf_token %} {{ formBox.as_p }}
+      <button type="submit">結果を見る</button>
+    </form>
+
+    {% if result %}
+    <h2>入力した値:</h2>
+    <ul>
+      <li>入力したカロリー:{{ result }}</li>
+      <li>選択した食材一覧:{{ option }}</li>
+      <li>選択した食材のカロリー:{{ weights }}</li>
+      <li>価値:{{ values }}</li>
+    </ul>
+    {% endif %} {% if calory %}
+    <h2>提案する食材:</h2>
+    <ul>
+      <li>{{ calory }}</li>
+      <li>{{ name }}</li>
+    </ul>
+    {% endif %}
+  </body>
+</html>
