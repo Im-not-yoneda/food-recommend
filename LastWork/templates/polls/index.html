@@ -8,6 +8,7 @@
   </head>
   <body>
     <h1>今日使う食材提案します！</h1>
+    <a href="/insert/">食材を追加する</a>
     <form method="post">
       <div class="calory">{% csrf_token %} {{ formNum.as_p }}</div>
       <div class="foods-label">今ある食材をチェック！</div>
