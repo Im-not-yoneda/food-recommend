@@ -110,5 +110,8 @@ def homework(request):
 
     return render(request, 'polls/index.html', {'formNum': formNum, 'result': result,'weights': weights,'option':name, 'values':values, 'formBox': formBox, 'selected_options': selected_options, 'calory': total_weight, 'name':select_name})
 
+def insertFood(request):
+    return render(request, "polls/insertFood.html")
+
 def index(request):
     return HttpResponse("Hello, world. You're at the polls index.")
