@@ -4,6 +4,5 @@
   "tabWidth": 4,
   "singleQuote": true,
   "trailingComma": "none",
-  "semi": false,
-  "parser": "typescript"
+  "semi": false
 }
