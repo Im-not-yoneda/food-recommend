@@ -6,7 +6,7 @@ from .forms import CheckBox
 from .forms import NumberInput
 from pulp import LpProblem, LpVariable, LpMaximize
 
-def homework(request):
+def foodrecommend(request):
     weights = []
     values = []
     name = []
@@ -96,7 +96,6 @@ def homework(request):
                 values.append(3)
                 weights.append(59)
                 name.append("じゃがいも")
-
             knapsack_result = knapsack_solver(weights, values, number)
             selected_items = knapsack_result['selected_items']
             total_value = knapsack_result['total_value']
@@ -104,14 +103,15 @@ def homework(request):
             select_name = [name[i] for i in selected_items]
         else:
             selected_options = []
+            return render(request, 'polls/index.html', {'formNum': formNum, 'result': result,'weights': weights,'option':name, 'values':values, 'formBox': formBox, 'selected_options': selected_options, 'calory': total_weight, 'name':select_name})
     else:
         formBox = CheckBox()
         selected_options = []
-
-    return render(request, 'polls/index.html', {'formNum': formNum, 'result': result,'weights': weights,'option':name, 'values':values, 'formBox': formBox, 'selected_options': selected_options, 'calory': total_weight, 'name':select_name})
+        return render(request, 'polls/index.html', {'formNum': formNum, 'result': result,'weights': weights,'option':name, 'values':values, 'formBox': formBox, 'selected_options': selected_options, 'calory': total_weight, 'name':select_name})
+    return render(request, 'polls/result.html', {'formNum': formNum, 'result': result,'weights': str(weights)[1:-1],'option':",".join(name), 'values':str(values)[1:-1], 'formBox': formBox, 'selected_options': selected_options, 'calory': total_weight, 'name':",".join(select_name)})
 
 def insertFood(request):
-    return render(request, "polls/insertFood.html")
+    return render(request, 'polls/insertFood.html')
 
-def index(request):
-    return HttpResponse("Hello, world. You're at the polls index.")
+def about(request):
+    return render(request, 'polls/about.html')
