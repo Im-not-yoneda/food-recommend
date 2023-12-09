@@ -29,3 +29,14 @@ h1 {
 	color: var(--accent-color) !important;
 	padding-top: 80px;
 }
+.try {
+	padding-bottom: 50px;
+}
+.try a {
+	font-size: 20px;
+	color: var(--accent-color) !important;
+	border: var(--accent-color) solid 2px;
+	padding: 2px 10px;
+	text-decoration: none;
+	font-family: var(--En-font);
+}
