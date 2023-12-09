@@ -115,3 +115,6 @@ def insertFood(request):
 
 def about(request):
     return render(request, 'polls/about.html')
+
+def result(request):
+    return render(request, 'polls/result.html')
