@@ -40,3 +40,9 @@ h1 {
 	text-decoration: none;
 	font-family: var(--En-font);
 }
+.card {
+	border: 1px solid var(--font-color) !important;
+}
+b.accent {
+	color: var(--accent-color) !important;
+}
