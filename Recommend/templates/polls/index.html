@@ -55,7 +55,7 @@
 			</div>
 			<div class="foods-label fw-semibold">今ある食材をチェック</div>
 			<div class="foods">{% csrf_token %} {{ formBox.as_p }}</div>
-			<button class="fw-bold" type="submit">Result</button>
+			<button class="fw-bold" type="submit" formaction="./result/">Result</button>
 		</form>
 
 		{% if result %}

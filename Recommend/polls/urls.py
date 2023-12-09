@@ -6,5 +6,5 @@ urlpatterns = [
     path("", views.foodrecommend, name="recommend"),
     path("about/", views.about, name="about"),
     path("insert/", views.insertFood, name="insert"),
-    path("result/", views.result, name="result")
+    path("result/", views.foodrecommend, name="result")
 ]

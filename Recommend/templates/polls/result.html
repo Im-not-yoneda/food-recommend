@@ -13,6 +13,37 @@
 		<title>RESULT</title>
 	</head>
 	<body>
-		<div>test</div>
+		<h1 class="fw-bold text-center mb-5">RESULT</h1>
+            {% if result %}
+            <div class="card h-100 mx-auto mb-4" style="max-width: 70%;">
+                <div class="card-body">
+                    <h5 class="card-title fw-bold text-center">Selected values</h5>
+                    <p class="card-text">
+                        <ul>
+                            <li>入力した目標カロリー：{{ result }}kcal</li>
+                            <li>選択した食材一覧：{{ option }}</li>
+                            <li>選択した食材のカロリー：{{ weights }}</li>
+                            <li>選択した食材の価値：{{ values }}</li>
+                        </ul>
+                    </p>
+                </div>
+            </div>
+            {% endif %}
+            {% if calory %}
+            <div class="card h-100 mx-auto" style="max-width: 70%;">
+                <div class="card-body">
+                    <h5 class="card-title fw-bold text-center">Recommend foods</h5>
+                    <p class="card-text">
+                        <ul>
+                            <li>
+                                総カロリー：<b class="accent">{{ calory }}kcal</b>
+                                <p style="font-size: 12px">※すべて100gで計算</p>
+                            </li>
+                            <li><b class="accent">{{ name }}</b></li>
+                        </ul>
+                    </p>
+                </div>
+            </div>
+            {% endif %}
 	</body>
 </html>
