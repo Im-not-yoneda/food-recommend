@@ -1,89 +1,91 @@
 <!DOCTYPE html>
 <html lang="ja">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link href="../../static/css/style.css" rel="stylesheet" />
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
-      crossorigin="anonymous"
-    />
-    <title>FoodRecommend</title>
-  </head>
-  <body>
-    <div class="container">
-      <nav class="navbar fixed-top navbar-expand-lg bg-body-tertiary">
-        <div class="container-fluid">
-          <a class="navbar-brand" href="#">Navbar scroll</a>
-          <button
-            class="navbar-toggler"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarScroll"
-            aria-controls="navbarScroll"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarScroll">
-            <ul
-              class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll"
-              style="--bs-scroll-height: 100px"
-            >
-              <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="/">HOME</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="/about/">ABOUT</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link disabled">Link</a>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </nav>
-    </div>
-    <h1>今日使う食材提案します！</h1>
-    <a href="/insert/">食材を追加する</a>
-    <form method="post">
-      <div class="calory">{% csrf_token %} {{ formNum.as_p }}</div>
-      <div class="foods-label">今ある食材をチェック！</div>
-      <div class="foods">{% csrf_token %} {{ formBox.as_p }}</div>
-      <button type="submit">結果を見る</button>
-    </form>
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link href="../../static/css/style.css" rel="stylesheet" />
+		<link
+			href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+			rel="stylesheet"
+			integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
+			crossorigin="anonymous"
+		/>
+		<title>FoodRecommend</title>
+	</head>
+	<body>
+		<div class="container">
+			<nav class="navbar fixed-top navbar-expand-lg bg-body-tertiary">
+				<div class="container-fluid">
+					<a class="navbar-brand" href="#">FoodRecommend</a>
+					<button
+						class="navbar-toggler"
+						type="button"
+						data-bs-toggle="collapse"
+						data-bs-target="#navbarScroll"
+						aria-controls="navbarScroll"
+						aria-expanded="false"
+						aria-label="Toggle navigation"
+					>
+						<span class="navbar-toggler-icon"></span>
+					</button>
+					<div class="collapse navbar-collapse" id="navbarScroll">
+						<ul
+							class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll"
+							style="--bs-scroll-height: 100px"
+						>
+							<li class="nav-item">
+								<a class="nav-link active" aria-current="page" href="/">HOME</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="/about/">ABOUT</a>
+							</li>
+							<li class="nav-item">
+								<a href="/insert/" class="nav-link disabled">INSERT</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</nav>
+		</div>
+		<h1 class="fw-bold mb-5" id="#">FoodRecommend</h1>
+		<form method="post">
+			<div class="calory d-flex justify-content-center fw-bold">
+				<div>{% csrf_token %} {{ formNum.as_p }}</div>
+				<div>kcal</div>
+			</div>
+			<div class="foods-label fw-semibold">今ある食材をチェック</div>
+			<div class="foods">{% csrf_token %} {{ formBox.as_p }}</div>
+			<button class="fw-bold" type="submit">Result</button>
+		</form>
 
-    {% if result %}
-    <div class="result">
-      <div class="result-content">
-        <h2>入力した値</h2>
-        <ul>
-          <li>入力した目標カロリー：{{ result }}kcal</li>
-          <li>選択した食材一覧：{{ option }}</li>
-          <li>選択した食材のカロリー：{{ weights }}</li>
-          <li>選択した食材の価値：{{ values }}</li>
-        </ul>
-      </div>
-      {% endif %} {% if calory %}
-      <div class="result-content">
-        <h2>これを使って料理しよう！</h2>
-        <ul>
-          <li>
-            総カロリー：{{ calory }}kcal
-            <p style="font-size: 12px">※すべて100gで計算</p>
-          </li>
-          <li>{{ name }}</li>
-        </ul>
-      </div>
-    </div>
-    {% endif %}
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
-      crossorigin="anonymous"
-    ></script>
-  </body>
+		{% if result %}
+		<div class="result">
+			<div class="result-content">
+				<h2>入力した値</h2>
+				<ul>
+					<li>入力した目標カロリー：{{ result }}kcal</li>
+					<li>選択した食材一覧：{{ option }}</li>
+					<li>選択した食材のカロリー：{{ weights }}</li>
+					<li>選択した食材の価値：{{ values }}</li>
+				</ul>
+			</div>
+			{% endif %} {% if calory %}
+			<div class="result-content">
+				<h2>これを使って料理しよう！</h2>
+				<ul>
+					<li>
+						総カロリー：{{ calory }}kcal
+						<p style="font-size: 12px">※すべて100gで計算</p>
+					</li>
+					<li>{{ name }}</li>
+				</ul>
+			</div>
+		</div>
+		{% endif %}
+		<script
+			src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+			integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+			crossorigin="anonymous"
+		></script>
+	</body>
 </html>
