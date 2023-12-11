@@ -43,7 +43,6 @@ def foodrecommend(request):
             result = number
     else:
         formNum = NumberInput()
-        onegai = None
 
     if request.method == 'POST':
         formBox = CheckBox(request.POST)
@@ -98,17 +97,19 @@ def foodrecommend(request):
                 name.append("じゃがいも")
             knapsack_result = knapsack_solver(weights, values, number)
             selected_items = knapsack_result['selected_items']
-            total_value = knapsack_result['total_value']
+            total_value = sum(values)
+            if total_value >= 1000:
+                total_value = total_value - 998
             total_weight = knapsack_result['total_weight']
             select_name = [name[i] for i in selected_items]
         else:
             selected_options = []
-            return render(request, 'polls/index.html', {'formNum': formNum, 'result': result,'weights': weights,'option':name, 'values':values, 'formBox': formBox, 'selected_options': selected_options, 'calory': total_weight, 'name':select_name})
+            return render(request, 'polls/index.html', {'formNum': formNum, 'result': result,'weights': weights,'option':name, 'values':values, 'formBox': formBox, 'selected_options': selected_options, 'calory': total_weight, 'name':select_name, 'value': total_value})
     else:
         formBox = CheckBox()
         selected_options = []
         return render(request, 'polls/index.html', {'formNum': formNum, 'result': result,'weights': weights,'option':name, 'values':values, 'formBox': formBox, 'selected_options': selected_options, 'calory': total_weight, 'name':select_name})
-    return render(request, 'polls/result.html', {'formNum': formNum, 'result': result,'weights': str(weights)[1:-1],'option':",".join(name), 'values':str(values)[1:-1], 'formBox': formBox, 'selected_options': selected_options, 'calory': total_weight, 'name':",".join(select_name)})
+    return render(request, 'polls/result.html', {'formNum': formNum, 'result': result,'weights': str(weights)[1:-1],'option':",".join(name), 'values':str(values)[1:-1], 'formBox': formBox, 'selected_options': selected_options, 'calory': total_weight, 'name':",".join(select_name), 'value': total_value})
 
 def insertFood(request):
     return render(request, 'polls/insertFood.html')

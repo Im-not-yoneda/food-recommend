@@ -56,8 +56,8 @@
                         <ul>
                             <li>入力した目標カロリー：{{ result }}kcal</li>
                             <li>選択した食材一覧：{{ option }}</li>
-                            <li>選択した食材のカロリー：{{ weights }}</li>
-                            <li>選択した食材の価値：{{ values }}</li>
+                            <li>選択した食材のカロリー(kcal)：{{ weights }}</li>
+                            <li>選択した食材のたんぱく質量：{{ values }}</li>
                         </ul>
                     </p>
                 </div>
@@ -73,7 +73,14 @@
                                 総カロリー：<b class="accent">{{ calory }}kcal</b>
                                 <p style="font-size: 12px">※すべて100gで計算</p>
                             </li>
-                            <li><b class="accent">{{ name }}</b></li>
+							<li>
+								総タンパク質量：<b class="accent">{{ value }}g</b>
+								<p style="font-size: 12px">※すべて100gで計算</p>
+							</li>
+                            <li class="mt-3">
+								おすすめ食材<br>
+								<b class="accent">{{ name }}</b>
+							</li>
                         </ul>
                     </p>
                 </div>
