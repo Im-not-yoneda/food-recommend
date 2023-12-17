@@ -3,6 +3,7 @@ from django.shortcuts import render
 # Create your views here.
 from django.http import HttpResponse
 from .forms import CheckBox
+from .forms import calorie_form
 from .forms import test_form
 from pulp import LpProblem, LpVariable, LpMaximize
 from .models import food
@@ -29,10 +30,12 @@ def foodrecommend(request):
         }
     
     if request.method == 'POST':
+        calorie = calorie_form(request.POST)
         checkbox = CheckBox(request.POST)
     else:
+        calorie = calorie_form()
         checkbox = CheckBox()
-    return render(request, 'polls/index.html', {'food_names': checkbox})
+    return render(request, 'polls/index.html', {'calorie': calorie,'food_names': checkbox})
 
 def insertFood(request):
     return render(request, 'polls/insertFood.html')

@@ -16,5 +16,5 @@ class test_form(forms.Form):
         required = False
     )
 
-class NumberInput(forms.Form):
-    number = forms.DecimalField(label='目標摂取カロリー', max_digits=10000, decimal_places=0)
+class calorie_form(forms.Form):
+    calorie = forms.DecimalField(label='目標摂取カロリー', max_digits=10000, decimal_places=0)
