@@ -5,6 +5,7 @@ from django.http import HttpResponse
 from .forms import CheckBox
 from .forms import NumberInput
 from pulp import LpProblem, LpVariable, LpMaximize
+from .models import food
 
 def foodrecommend(request):
     weights = []
@@ -116,3 +117,9 @@ def insertFood(request):
 
 def about(request):
     return render(request, 'polls/about.html')
+
+def test(request):
+    context = {
+        'db_list': food.objects.all()
+    }
+    return render(request, 'polls/test.html', context)
