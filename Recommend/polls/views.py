@@ -32,6 +32,8 @@ def foodrecommend(request):
     if request.method == 'POST':
         calorie = calorie_form(request.POST)
         checkbox = CheckBox(request.POST)
+        if calorie.is_valid():
+            return render(request, 'polls/result.html')
     else:
         calorie = calorie_form()
         checkbox = CheckBox()
