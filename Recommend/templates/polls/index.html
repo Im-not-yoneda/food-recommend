@@ -54,7 +54,9 @@
 				<div>kcal</div>
 			</div>
 			<div class="foods-label fw-semibold">今ある食材をチェック</div>
-			<div class="foods">{% csrf_token %} {{ formBox.as_p }}</div>
+			{% for food_name in food_names.food_names %}
+			<div class="foods">{{ food_name.tag }} {{ food_name.choice_label }}</div>
+			{%endfor %}
 			<button class="fw-bold" type="submit" formaction="./result/">Result</button>
 		</form>
 
