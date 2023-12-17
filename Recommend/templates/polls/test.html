@@ -12,5 +12,10 @@
 			<li>{{ db.name }}</li>
 			{% endfor %}
 		</ul>
+		<ul>
+			{% for choice in food_name.food_name %}
+			<li style="list-style: none">{{ choice.tag }} {{ choice.choice_label }}</li>
+			{%endfor %}
+		</ul>
 	</body>
 </html>
