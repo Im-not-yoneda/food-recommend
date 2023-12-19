@@ -34,6 +34,7 @@ def foodrecommend(request):
         checkbox = CheckBox(request.POST)
         selected_calorie_list = []
         selected_value_list = []
+        result_foods_list = []
 
         if checkbox.is_valid() and calorie.is_valid:
             input_calorie = calorie.data['calorie']
@@ -48,8 +49,19 @@ def foodrecommend(request):
             selected_calorie_list_new = [str(a) for a in selected_calorie_list]
             selected_calorie = "、".join(selected_calorie_list_new)
             selected_value_list_new = [str(a) for a in selected_value_list]
-            selected_value = "、".join(selected_value_list_new)
-            return render(request, 'polls/result.html', {'input_calorie': input_calorie,'selected_foods': selected_foods,'selected_calories': selected_calorie,'selected_values':selected_value})
+            selected_value = "、".join(selected_value_list_new)\
+
+            result = knapsack_solver(selected_calorie_list,selected_value_list,input_calorie)
+            for result_food in result['selected_items']:
+                result_foods_list.append(selected_foods_list[result_food])
+            result_foods = "、".join(result_foods_list)
+            result_value = result['total_value']
+            # ごはん差分
+            if result_value > 1000:
+                result_value = result['total_value'] - 998
+            result_calory = result['total_weight']
+
+            return render(request, 'polls/result.html', {'input_calorie': input_calorie,'selected_foods': selected_foods,'selected_calories': selected_calorie,'selected_values':selected_value,'result_calory': result_calory,'result_value': result_value,'result_foods': result_foods})
     else:
         calorie = calorie_form()
         checkbox = CheckBox()
