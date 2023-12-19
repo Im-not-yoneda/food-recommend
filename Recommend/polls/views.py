@@ -32,12 +32,24 @@ def foodrecommend(request):
     if request.method == 'POST':
         calorie = calorie_form(request.POST)
         checkbox = CheckBox(request.POST)
+        selected_calorie_list = []
+        selected_value_list = []
+
         if checkbox.is_valid() and calorie.is_valid:
-            input_calorie = calorie.data
-            input_calorie = input_calorie['calorie']
-            selected_foods = checkbox.cleaned_data['food_names']
-            selected_foods = "、".join(selected_foods)
-            return render(request, 'polls/result.html', {'input_calorie': input_calorie,'selected_foods': selected_foods})
+            input_calorie = calorie.data['calorie']
+            selected_foods_list = checkbox.cleaned_data['food_names']
+            selected_foods = "、".join(selected_foods_list)
+
+            for selected_food in selected_foods_list:
+                food_data = food.objects.get(name=selected_food)
+                selected_calorie_list.append(food_data.calorie)
+                selected_value_list.append(food_data.value)
+
+            selected_calorie_list_new = [str(a) for a in selected_calorie_list]
+            selected_calorie = "、".join(selected_calorie_list_new)
+            selected_value_list_new = [str(a) for a in selected_value_list]
+            selected_value = "、".join(selected_value_list_new)
+            return render(request, 'polls/result.html', {'input_calorie': input_calorie,'selected_foods': selected_foods,'selected_calories': selected_calorie,'selected_values':selected_value})
     else:
         calorie = calorie_form()
         checkbox = CheckBox()
