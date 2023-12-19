@@ -48,16 +48,16 @@
 			</nav>
 		</div>
 		<h1 class="fw-bold text-center mb-5">RESULT</h1>
-            {% if result %}
+            {% if selected_foods %}
             <div class="card h-100 mx-auto mb-4" style="max-width: 70%;">
                 <div class="card-body">
                     <h5 class="card-title fw-bold text-center">Selected values</h5>
                     <p class="card-text">
                         <ul>
-                            <li>入力した目標カロリー：{{ result }}kcal</li>
-                            <li>選択した食材一覧：{{ option }}</li>
-                            <li>選択した食材のカロリー(kcal)：{{ weights }}</li>
-                            <li>選択した食材のたんぱく質量：{{ values }}</li>
+                            <li>入力した目標カロリー：{{ input_calorie }}kcal</li>
+                            <li>選択した食材一覧：{{ selected_foods }}</li>
+                            <li>選択した食材のカロリー(kcal)：{{ selected_calories }}</li>
+                            <li>選択した食材のたんぱく質量：{{ selected_values }}</li>
                         </ul>
                     </p>
                 </div>
