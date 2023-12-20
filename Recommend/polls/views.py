@@ -3,17 +3,12 @@ from django.shortcuts import render
 # Create your views here.
 from django.http import HttpResponse
 from .forms import CheckBox
-from .forms import NumberInput
+from .forms import calorie_form
+from .forms import test_form
 from pulp import LpProblem, LpVariable, LpMaximize
+from .models import food
 
 def foodrecommend(request):
-    weights = []
-    values = []
-    name = []
-    result = None
-    total_weight = None
-    select_name = None
-
     def knapsack_solver(weights, values, capacity):
         num_items = len(weights)
         # 合計価値を最大化するための線形プログラム問題を作成
@@ -33,86 +28,54 @@ def foodrecommend(request):
             'total_value': sum(float(values[i]) for i in selected_items),
             'total_weight': sum(float(weights[i]) for i in selected_items)
         }
-
-
+    
     if request.method == 'POST':
-        formNum = NumberInput(request.POST)
-        if formNum.is_valid():
-            # フォームのデータを処理
-            number = formNum.cleaned_data['number']
-            result = number
-    else:
-        formNum = NumberInput()
+        calorie = calorie_form(request.POST)
+        checkbox = CheckBox(request.POST)
+        selected_calorie_list = []
+        selected_value_list = []
+        result_foods_list = []
 
-    if request.method == 'POST':
-        formBox = CheckBox(request.POST)
-        # 選択した要素一覧
-        if formBox.is_valid():
-            formBox_reg = formBox.cleaned_data.get('chickin_reg')
-            formBox_chest = formBox.cleaned_data.get('chickin_chest')
-            formBox_brrocori = formBox.cleaned_data.get('brrocori')
-            formBox_carrot = formBox.cleaned_data.get('carrot')
-            formBox_onion = formBox.cleaned_data.get('onion')
-            formBox_beef = formBox.cleaned_data.get('beef')
-            formBox_pork = formBox.cleaned_data.get('pork')
-            formBox_rice = formBox.cleaned_data.get('rice')
-            formBox_potato = formBox.cleaned_data.get('potato')
-            selected_options = [formBox.fields[key].label for key, value in formBox.cleaned_data.items() if value]
-            # タンパク質とカロリーを定義
-            if formBox_reg:
-                values.append(25)
-                weights.append(200)
-                name.append("鶏もも肉")
-            if formBox_chest:
-                values.append(23)
-                weights.append(150)
-                name.append("鶏むね肉")
-            if formBox_brrocori:
-                values.append(4)
-                weights.append(50)
-                name.append("ブロッコリー")
-            if formBox_carrot:
-                values.append(1)
-                weights.append(28)
-                name.append("にんじん")
-            if formBox_onion:
-                values.append(1)
-                weights.append(33)
-                name.append("たまねぎ")
-            if formBox_beef:
-                values.append(20)
-                weights.append(148)
-                name.append("牛もも肉")
-            if formBox_pork:
-                values.append(14)
-                weights.append(386)
-                name.append("豚バラ肉")
-            if formBox_rice:
-                values.append(1000)
-                weights.append(168)
-                name.append("ごはん")
-            if formBox_potato:
-                values.append(3)
-                weights.append(59)
-                name.append("じゃがいも")
-            knapsack_result = knapsack_solver(weights, values, number)
-            selected_items = knapsack_result['selected_items']
-            total_value = sum(values)
-            if total_value >= 1000:
-                total_value = total_value - 998
-            total_weight = knapsack_result['total_weight']
-            select_name = [name[i] for i in selected_items]
-        else:
-            selected_options = []
-            return render(request, 'polls/index.html', {'formNum': formNum, 'result': result,'weights': weights,'option':name, 'values':values, 'formBox': formBox, 'selected_options': selected_options, 'calory': total_weight, 'name':select_name, 'value': total_value})
+        if checkbox.is_valid() and calorie.is_valid:
+            input_calorie = calorie.data['calorie']
+            selected_foods_list = checkbox.cleaned_data['food_names']
+            selected_foods = "、".join(selected_foods_list)
+
+            for selected_food in selected_foods_list:
+                food_data = food.objects.get(name=selected_food)
+                selected_calorie_list.append(food_data.calorie)
+                selected_value_list.append(food_data.value)
+
+            selected_calorie_list_new = [str(a) for a in selected_calorie_list]
+            selected_calorie = "、".join(selected_calorie_list_new)
+            selected_value_list_new = [str(a) for a in selected_value_list]
+            selected_value = "、".join(selected_value_list_new)\
+
+            result = knapsack_solver(selected_calorie_list,selected_value_list,input_calorie)
+            for result_food in result['selected_items']:
+                result_foods_list.append(selected_foods_list[result_food])
+            result_foods = "、".join(result_foods_list)
+            result_value = result['total_value']
+            # ごはん差分
+            if result_value > 1000:
+                result_value = result['total_value'] - 998
+            result_calory = result['total_weight']
+
+            return render(request, 'polls/result.html', {'input_calorie': input_calorie,'selected_foods': selected_foods,'selected_calories': selected_calorie,'selected_values':selected_value,'result_calory': result_calory,'result_value': result_value,'result_foods': result_foods})
     else:
-        formBox = CheckBox()
-        selected_options = []
-        return render(request, 'polls/index.html', {'formNum': formNum, 'result': result,'weights': weights,'option':name, 'values':values, 'formBox': formBox, 'selected_options': selected_options, 'calory': total_weight, 'name':select_name})
-    return render(request, 'polls/result.html', {'formNum': formNum, 'result': result,'weights': str(weights)[1:-1],'option':",".join(name), 'values':str(values)[1:-1], 'formBox': formBox, 'selected_options': selected_options, 'calory': total_weight, 'name':",".join(select_name), 'value': total_value})
+        calorie = calorie_form()
+        checkbox = CheckBox()
+    return render(request, 'polls/index.html', {'calorie': calorie,'food_names': checkbox})
 
 def insertFood(request):
     return render(request, 'polls/insertFood.html')
 
 def about(request):
     return render(request, 'polls/about.html')
+
+def test(request):
+    if request.method == 'POST':
+        form = test_form(request.POST)
+    else:
+        form = test_form()
+    return render(request, 'polls/test.html', {'db_list': food.objects.all(),'food_name': form})

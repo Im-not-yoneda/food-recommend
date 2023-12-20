@@ -50,11 +50,13 @@
 		<h1 class="fw-bold mb-5" id="#">FoodRecommend</h1>
 		<form method="post">
 			<div class="calory d-flex justify-content-center fw-bold">
-				<div>{% csrf_token %} {{ formNum.as_p }}</div>
+				<div>{% csrf_token %} {{ calorie.as_p }}</div>
 				<div>kcal</div>
 			</div>
 			<div class="foods-label fw-semibold">今ある食材をチェック</div>
-			<div class="foods">{% csrf_token %} {{ formBox.as_p }}</div>
+			{% for food_name in food_names.food_names %}
+			<div class="foods">{{ food_name.tag }} {{ food_name.choice_label }}</div>
+			{%endfor %}
 			<button class="fw-bold" type="submit" formaction="./result/">Result</button>
 		</form>
 
