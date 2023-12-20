@@ -31,60 +31,25 @@ h1 {
 	text-align: center;
 	padding-top: 80px;
 }
-form {
-	text-align: center;
+
+/* ポップアップ画面 */
+.popup {
+	display: none;
+	height: 100vh;
+	width: 100%;
+	background-color: black;
+	opacity: 0.7;
+	position: fixed;
+	top: 0;
+	left: 0;
 }
-form .calory {
-	font-size: 25px;
-}
-form .calory input {
-	font-size: 25px;
-}
-form .foods-label {
-	font-size: 25px;
-	margin-bottom: 15px;
-}
-.flex {
-	display: flex;
-	flex-wrap: wrap;
-	text-align: left;
-	width: 50%;
-	margin: auto;
-}
-.foods {
-	width: calc(100% / 3 - 50px);
-	margin-left: 50px;
-}
-.result {
-	display: flex;
-}
-.result-content {
-	flex: 1;
-}
-.result-content {
-	text-align: center;
-}
-.result-content li {
-	list-style: none;
-}
-button {
-	font-size: 20px !important;
-	font-family: var(--En-font) !important;
-	color: var(--accent-color);
+.content {
 	background-color: var(--bg-color);
-	border: var(--accent-color) 2px solid;
-	margin-top: 20px;
+	padding: 30px;
+	width: 50%;
 }
-input {
-	font-family: var(--En-font) !important;
-	color: var(--accent-color) !important;
-	text-align: right;
-}
-input[type='checkbox'] {
-	accent-color: var(--accent-color);
-	block-size: 20px;
-	inline-size: 20px;
+.show {
+	display: flex;
+	justify-content: center;
 	align-items: center;
-	position: relative;
-	top: 4px;
 }

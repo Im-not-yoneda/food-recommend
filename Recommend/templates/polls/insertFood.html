@@ -3,6 +3,13 @@
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link href="../../static/css/insertFood.css" rel="stylesheet" />
+		<link
+			href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+			rel="stylesheet"
+			integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
+			crossorigin="anonymous"
+		/>
 		<title>Document</title>
 	</head>
 	<body>
@@ -40,7 +47,23 @@
 				</div>
 			</nav>
 		</div>
-		<h1>食材の登録</h1>
-		<a href="/">戻る</a>
+		<h1 class="fw-bold">INSERT</h1>
+		<form id="form" method="post" onsubmit="check()">
+			<div>{% csrf_token %}{{ name_form }}</div>
+			<div>{% csrf_token %}{{ calorie_form }}</div>
+			<div>{% csrf_token %}{{ value_form }}</div>
+			<button id="insert" class="fw-bold mt-3" type="submit">INSERT</button>
+		</form>
+		<div id="popup" class="popup">
+			<div class="popup-content">
+				<h2>SUCSESS!</h2>
+				<a href="/">EXIT</a>
+			</div>
+		</div>
+		<script>
+			function check() {
+				console.log('test');
+			}
+		</script>
 	</body>
 </html>
