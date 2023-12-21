@@ -31,41 +31,70 @@ h1 {
 	text-align: center;
 	padding-top: 80px;
 }
-form {
+.insert-desc {
 	text-align: center;
 }
-form .calory {
-	font-size: 25px;
-}
-form .calory input {
-	font-size: 25px;
-}
-form .foods-label {
-	font-size: 25px;
-	margin-bottom: 15px;
-}
-.flex {
-	display: flex;
-	flex-wrap: wrap;
-	text-align: left;
+.insert-desc-title {
+	font-weight: 700 !important;
 	width: 50%;
+}
+.accent {
+	color: var(--accent-color);
+}
+h2 {
+	text-align: center;
+	font-family: var(--En-font);
+	color: var(--font-color);
+	font-weight: 700 !important;
+	width: 13%;
 	margin: auto;
 }
-.foods {
-	width: calc(100% / 3 - 50px);
-	margin-left: 50px;
-}
-.result {
+.insert-success {
 	display: flex;
+	column-gap: 55px;
+	justify-content: center;
 }
-.result-content {
-	flex: 1;
+.insert-success div {
+	font-size: 22px;
+	text-align: center;
+	font-weight: bold;
+	margin-bottom: 20px;
 }
-.result-content {
+.exit {
 	text-align: center;
 }
-.result-content li {
-	list-style: none;
+.exit a {
+	font-size: 20px;
+	color: var(--accent-color) !important;
+	border: var(--accent-color) solid 2px;
+	padding: 2px 10px;
+	text-decoration: none;
+	font-family: var(--En-font);
+}
+.insert_form {
+	text-align: center;
+}
+.insert_form div {
+	width: 50%;
+	margin: 0 0 20px 20%;
+}
+label {
+	color: var(--font-color);
+	font-weight: bold;
+	display: inline-block;
+	text-align: right;
+	width: 150px;
+}
+input {
+	font-family: var(--Jp-font) !important;
+	color: var(--accent-color) !important;
+	text-align: center;
+	font-weight: bold;
+	width: 150px;
+}
+input[type='number'] {
+	font-family: var(--En-font) !important;
+	width: 150px;
 }
 button {
 	font-size: 20px !important;
@@ -74,17 +103,4 @@ button {
 	background-color: var(--bg-color);
 	border: var(--accent-color) 2px solid;
 	margin-top: 20px;
-}
-input {
-	font-family: var(--En-font) !important;
-	color: var(--accent-color) !important;
-	text-align: right;
-}
-input[type='checkbox'] {
-	accent-color: var(--accent-color);
-	block-size: 20px;
-	inline-size: 20px;
-	align-items: center;
-	position: relative;
-	top: 4px;
 }
