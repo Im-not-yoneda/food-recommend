@@ -10,7 +10,7 @@
 			integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
 			crossorigin="anonymous"
 		/>
-		<title>Document</title>
+		<title>INSERT</title>
 	</head>
 	<body>
 		<div class="container">
@@ -40,30 +40,52 @@
 								<a class="nav-link" href="/about/">ABOUT</a>
 							</li>
 							<li class="nav-item">
-								<a href="/insert/" class="nav-link disabled">INSERT</a>
+								<a href="/insert/" class="nav-link">INSERT</a>
 							</li>
 						</ul>
 					</div>
 				</div>
 			</nav>
 		</div>
-		<h1 class="fw-bold">INSERT</h1>
-		<form id="form" method="post" onsubmit="check()">
-			<div>{% csrf_token %}{{ name_form }}</div>
-			<div>{% csrf_token %}{{ calorie_form }}</div>
-			<div>{% csrf_token %}{{ value_form }}</div>
-			<button id="insert" class="fw-bold mt-3" type="submit">INSERT</button>
-		</form>
-		<div id="popup" class="popup">
-			<div class="popup-content">
-				<h2>SUCSESS!</h2>
+		<div class="insert">
+			<h1 class="fw-bold mb-5">INSERT</h1>
+			<div class="insert-desc mb-4">
+				<h2 class="insert-desc-title mb-3">このページについて</h2>
+				<p>
+					食材のデータを挿入するためのページです。<br />
+					<b class="accent">食材名</b>と100gあたりの<b class="accent">カロリー</b>、
+					<b class="accent">たんぱく質量</b>のデータを挿入しましょう。
+				</p>
+			</div>
+			{% if success_name and success_calorie and success_value %}
+			<h2 class="mb-4">SUCCESS</h2>
+			<div class="insert-success">
+				<div>
+					入力した食材
+					<p class="accent">{{ success_name }}</p>
+				</div>
+				<div>
+					カロリー
+					<p class="accent">{{ success_calorie }}kcal</p>
+				</div>
+				<div>
+					たんぱく質量
+					<p class="accent">{{ success_value }}g</p>
+				</div>
+			</div>
+			<div class="exit fw-bold mt-5">
 				<a href="/">EXIT</a>
 			</div>
+			{% else %}
+			<div class="insert_form">
+				<form id="form" method="post">
+					<div>{% csrf_token %}{{ name_form }}</div>
+					<div>{% csrf_token %}{{ calorie_form }}</div>
+					<div>{% csrf_token %}{{ value_form }}</div>
+					<button id="insert" class="fw-bold mt-3" type="submit">INSERT</button>
+				</form>
+			</div>
+			{% endif %}
 		</div>
-		<script>
-			function check() {
-				console.log('test');
-			}
-		</script>
 	</body>
 </html>

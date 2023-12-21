@@ -73,6 +73,10 @@ def insertFood(request):
         if name_form.is_valid() and calorie_value.is_valid() and value_form.is_valid():
             insert = food(name=name_form.data['name'], calorie=calorie_value.data['calorie'], value=value_form.data['value'])
             insert.save()
+            success_name = name_form.data['name']
+            success_calorie = calorie_value.data['calorie']
+            success_value = value_form.data['value']
+            return render(request, 'polls/insertFood.html', {'name_form': name_form, 'calorie_form': calorie_value, 'value_form': value_form, 'success_name': success_name, 'success_calorie': success_calorie, 'success_value': success_value})
     else:
         name_form = insert_name()
         calorie_value = insert_calorie()
