@@ -57,9 +57,9 @@ def foodrecommend(request):
             # ごはん差分
             if result_value > 1000:
                 result_value = result['total_value'] - 998
-            result_calory = result['total_weight']
+            result_calorie = result['total_weight']
 
-            return render(request, 'polls/result.html', {'input_calorie': input_calorie,'selected_foods': selected_foods,'selected_calories': selected_calorie,'selected_values':selected_value,'result_calory': result_calory,'result_value': result_value,'result_foods': result_foods})
+            return render(request, 'polls/result.html', {'input_calorie': input_calorie,'selected_foods': selected_foods,'selected_calories': selected_calorie,'selected_values':selected_value,'result_calorie': result_calorie,'result_value': result_value,'result_foods': result_foods})
     else:
         calorie = calorie_form()
         checkbox = CheckBox()

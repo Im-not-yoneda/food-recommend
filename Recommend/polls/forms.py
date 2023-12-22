@@ -4,7 +4,7 @@ from .models import food
 
 class CheckBox(forms.Form):
     food_names = forms.MultipleChoiceField(
-        choices = lambda: [(Food.pk, Food.name) for Food in food.objects.all()],
+        choices = lambda: [(Food.name, Food.name) for Food in food.objects.all()],
         widget = forms.CheckboxSelectMultiple,
         required = False
     )
