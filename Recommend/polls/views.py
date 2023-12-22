@@ -5,7 +5,9 @@ from django.http import HttpResponse
 from .forms import CheckBox, calorie_form, insert_name, insert_calorie, insert_value, test_form
 from pulp import LpProblem, LpVariable, LpMaximize
 from .models import food
+from django.contrib.auth.decorators import login_required
 
+@login_required
 def foodrecommend(request):
     def knapsack_solver(weights, values, capacity):
         num_items = len(weights)
