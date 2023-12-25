@@ -10,6 +10,7 @@ body {
 	font-family: var(--Jp-font) !important;
 	background-color: var(--bg-color) !important;
 	color: var(--font-color) !important;
+	text-align: center;
 	height: 100vh;
 	margin: 0;
 }
@@ -21,24 +22,16 @@ h1 {
 	padding-top: 20vh;
 	margin: 0;
 }
-form {
-	text-align: center;
-}
-form label {
-	font-size: 20px;
+p {
+	font-size: 25px;
 	font-weight: bold;
+	margin: 10vh 0;
 }
-input {
+a {
 	font-size: 20px;
-	font-family: var(--En-font) !important;
 	color: var(--accent-color) !important;
-	text-align: left;
-}
-button {
-	font-size: 20px !important;
-	font-family: var(--En-font) !important;
-	color: var(--accent-color);
-	background-color: var(--bg-color);
-	border: var(--accent-color) 2px solid;
-	margin-top: 20px;
+	border: var(--accent-color) solid 2px;
+	padding: 2px 10px;
+	text-decoration: none;
+	font-family: var(--En-font);
 }
