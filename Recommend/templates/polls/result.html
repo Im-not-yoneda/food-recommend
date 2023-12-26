@@ -4,6 +4,7 @@
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<link href="../../static/css/result.css" rel="stylesheet" />
+		<link href="../../static/css/header.css" rel="stylesheet" />
 		<link
 			href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
 			rel="stylesheet"
@@ -13,43 +14,7 @@
 		<title>RESULT</title>
 	</head>
 	<body>
-        <div class="container">
-			<nav class="navbar fixed-top navbar-expand-lg bg-body-tertiary">
-				<div class="container-fluid">
-					<a class="navbar-brand" href="#">FoodRecommend</a>
-					<button
-						class="navbar-toggler"
-						type="button"
-						data-bs-toggle="collapse"
-						data-bs-target="#navbarScroll"
-						aria-controls="navbarScroll"
-						aria-expanded="false"
-						aria-label="Toggle navigation"
-					>
-						<span class="navbar-toggler-icon"></span>
-					</button>
-					<div class="collapse navbar-collapse" id="navbarScroll">
-						<ul
-							class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll"
-							style="--bs-scroll-height: 100px"
-						>
-							<li class="nav-item">
-								<a class="nav-link active" aria-current="page" href="/">HOME</a>
-							</li>
-							<li class="nav-item">
-								<a class="nav-link" href="/about/">ABOUT</a>
-							</li>
-							<li class="nav-item">
-								<a href="/insert/" class="nav-link">INSERT</a>
-							</li>
-							<li class="nav-item">
-								<a href="/accounts/logout/" class="nav-link">LOG OUT</a>
-							</li>
-						</ul>
-					</div>
-				</div>
-			</nav>
-		</div>
+        {% include "./header.html" %}
 		<h1 class="fw-bold text-center mb-5">RESULT</h1>
             {% if input_calorie and selected_foods and selected_calories and selected_values %}
             <div class="card h-100 mx-auto mb-4" style="max-width: 70%;">
