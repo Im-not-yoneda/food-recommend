@@ -1,6 +1,7 @@
 # forms.py
 from django import forms
 from .models import food
+from django.db.models import Q
 
 class CheckBox(forms.Form):
     food_names = forms.MultipleChoiceField(
@@ -8,6 +9,10 @@ class CheckBox(forms.Form):
         widget = forms.CheckboxSelectMultiple,
         required = False
     )
+    def __init__(self, user, *args, **kwargs):
+        self.current_user = user
+        super().__init__(*args, **kwargs)
+        food.objects = food.objects.filter(Q(user_name=self.current_user)|Q(user_name=1))
 
 class calorie_form(forms.Form):
     calorie = forms.DecimalField(label='目標摂取カロリー', max_digits=10000, decimal_places=0)
