@@ -42,13 +42,16 @@
 							<li class="nav-item">
 								<a href="/insert/" class="nav-link">INSERT</a>
 							</li>
+							<li class="nav-item">
+								<a href="/accounts/logout/" class="nav-link">LOG OUT</a>
+							</li>
 						</ul>
 					</div>
 				</div>
 			</nav>
 		</div>
 		<h1 class="fw-bold text-center mb-5">RESULT</h1>
-            {% if selected_foods %}
+            {% if input_calorie and selected_foods and selected_calories and selected_values %}
             <div class="card h-100 mx-auto mb-4" style="max-width: 70%;">
                 <div class="card-body">
                     <h5 class="card-title fw-bold text-center">Selected values</h5>
@@ -63,14 +66,14 @@
                 </div>
             </div>
             {% endif %}
-            {% if result_calory %}
+            {% if result_calorie and result_value and result_foods %}
             <div class="card h-100 mx-auto" style="max-width: 70%;">
                 <div class="card-body">
                     <h5 class="card-title fw-bold text-center">Recommend foods</h5>
                     <p class="card-text">
                         <ul>
                             <li>
-                                総カロリー：<b class="accent">{{ result_calory }}kcal</b>
+                                総カロリー：<b class="accent">{{ result_calorie }}kcal</b>
                                 <p style="font-size: 12px">※すべて100gで計算</p>
                             </li>
 							<li>

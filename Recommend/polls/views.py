@@ -5,7 +5,26 @@ from django.http import HttpResponse
 from .forms import CheckBox, calorie_form, insert_name, insert_calorie, insert_value, test_form
 from pulp import LpProblem, LpVariable, LpMaximize
 from .models import food
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth import login, authenticate
+from django.shortcuts import render, redirect
 
+def signup(request):
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data.get('username')
+            raw_password = form.cleaned_data.get('password1')
+            user = authenticate(username=username, password=raw_password)
+            login(request, user)
+            return redirect("/")
+    else:
+        form = UserCreationForm()
+    return render(request, 'registration/signup.html', {'form':form})
+
+@login_required
 def foodrecommend(request):
     def knapsack_solver(weights, values, capacity):
         num_items = len(weights)
@@ -29,7 +48,7 @@ def foodrecommend(request):
     
     if request.method == 'POST':
         calorie = calorie_form(request.POST)
-        checkbox = CheckBox(request.POST)
+        checkbox = CheckBox(user=request.user, data=request.POST)
         selected_calorie_list = []
         selected_value_list = []
         result_foods_list = []
@@ -57,12 +76,12 @@ def foodrecommend(request):
             # ごはん差分
             if result_value > 1000:
                 result_value = result['total_value'] - 998
-            result_calory = result['total_weight']
+            result_calorie = result['total_weight']
 
-            return render(request, 'polls/result.html', {'input_calorie': input_calorie,'selected_foods': selected_foods,'selected_calories': selected_calorie,'selected_values':selected_value,'result_calory': result_calory,'result_value': result_value,'result_foods': result_foods})
+            return render(request, 'polls/result.html', {'input_calorie': input_calorie,'selected_foods': selected_foods,'selected_calories': selected_calorie,'selected_values':selected_value,'result_calorie': result_calorie,'result_value': result_value,'result_foods': result_foods})
     else:
         calorie = calorie_form()
-        checkbox = CheckBox()
+        checkbox = CheckBox(user=request.user)
     return render(request, 'polls/index.html', {'calorie': calorie,'food_names': checkbox})
 
 def insertFood(request):
@@ -70,8 +89,9 @@ def insertFood(request):
         name_form = insert_name(request.POST)
         calorie_value = insert_calorie(request.POST)
         value_form = insert_value(request.POST)
+        user = request.user
         if name_form.is_valid() and calorie_value.is_valid() and value_form.is_valid():
-            insert = food(name=name_form.data['name'], calorie=calorie_value.data['calorie'], value=value_form.data['value'])
+            insert = food(name=name_form.data['name'], calorie=calorie_value.data['calorie'], value=value_form.data['value'], user_name=user)
             insert.save()
             success_name = name_form.data['name']
             success_calorie = calorie_value.data['calorie']
