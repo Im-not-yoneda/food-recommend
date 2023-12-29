@@ -11,19 +11,6 @@ body {
 	background-color: var(--bg-color) !important;
 	color: var(--font-color) !important;
 }
-.container .navbar {
-	font-family: var(--En-font) !important;
-	background-color: var(--bg-color) !important;
-}
-.navbar-brand {
-	color: var(--accent-color) !important;
-}
-.nav-link {
-	color: var(--font-color) !important;
-}
-.nav-link.disabled {
-	color: var(--bs-nav-link-disabled-color) !important;
-}
 h1 {
 	font-size: 50px;
 	font-family: var(--En-font) !important;
