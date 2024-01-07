@@ -1,0 +1,26 @@
+@import url('https://fonts.googleapis.com/css2?family=M+PLUS+1p:wght@400;700&family=Oswald:wght@400;700&display=swap');
+:root {
+	--accent-color: #cc4644;
+	--bg-color: #f9fcf8;
+	--font-color: #2d4156;
+	--Jp-font: sans-serif;
+	--En-font: 'Oswald', sans-serif;
+}
+body {
+	font-family: var(--Jp-font) !important;
+	color: var(--font-color) !important;
+	background-color: var(--bg-color) !important;
+}
+.container .navbar {
+	font-family: var(--En-font) !important;
+	background-color: var(--bg-color) !important;
+}
+.navbar-brand {
+	color: var(--accent-color) !important;
+}
+.nav-link {
+	color: var(--font-color) !important;
+}
+.nav-link.disabled {
+	color: var(--bs-nav-link-disabled-color) !important;
+}
