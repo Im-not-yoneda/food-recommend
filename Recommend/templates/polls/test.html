@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="ja">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>test</title>
+	</head>
+	<body>
+		<h1 style="text-align: center">ここは試験的に動かすページです。</h1>
+		<ul>
+			{% for db in db_list %}
+			<li>{{ db.name }}</li>
+			{% endfor %}
+		</ul>
+		<ul>
+			{% for choice in food_name.food_name %}
+			<li style="list-style: none">{{ choice.tag }} {{ choice.choice_label }}</li>
+			{%endfor %}
+		</ul>
+	</body>
+</html>
